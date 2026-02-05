@@ -4,6 +4,7 @@ package com.example.Back_E_commece.Model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Produtos")
 public class Produto {
 
 @Id
@@ -16,8 +17,8 @@ private String img;
 @Column (name = "Nome")
 private String nome;
 
-@Column(name = "Produto")
-private String Produto;
+@Column(name = "Descricao")
+private String Descricao;
 
 @Column(name = "Preco")
 private Double Preco;
@@ -31,9 +32,9 @@ private Double Preco;
 
     public void setNome(String nome) {this.nome = nome;}
 
-    public String getProduto() {return Produto;}
+    public String getDescricao() {return Descricao;}
 
-    public void setProduto(String produto) {Produto = produto;}
+    public void setDescricao(String descricao) {Descricao = descricao;}
 
     public Double getPreco() {return Preco;}
 
