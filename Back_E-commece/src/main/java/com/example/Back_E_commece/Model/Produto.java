@@ -21,7 +21,7 @@ private String nome;
 private String Descricao;
 
 @Column(name = "Preco")
-private Double Preco;
+private Double preco;
 
 
     public String getImg() {return img;}
@@ -36,9 +36,9 @@ private Double Preco;
 
     public void setDescricao(String descricao) {Descricao = descricao;}
 
-    public Double getPreco() {return Preco;}
+    public Double getPreco() {return preco;}
 
-    public void setPreco(Double preco) {Preco = preco;}
+    public void setPreco(Double preco) {this.preco = preco;}
 
     public Long getId() {return id;}
 

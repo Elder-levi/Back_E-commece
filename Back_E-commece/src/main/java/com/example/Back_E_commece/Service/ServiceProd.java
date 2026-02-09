@@ -2,6 +2,7 @@ package com.example.Back_E_commece.Service;
 
 import com.example.Back_E_commece.Model.Produto;
 import com.example.Back_E_commece.Repository.RepositoryProd;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,5 +21,9 @@ private final RepositoryProd Repository;
         return Repository.findAll();
     }
 
+    public Produto SetProdut(Produto produto)
+    {
+        return Repository.save(produto);
+    }
 
 }

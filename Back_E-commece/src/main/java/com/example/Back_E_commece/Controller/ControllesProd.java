@@ -1,15 +1,24 @@
 package com.example.Back_E_commece.Controller;
 
 
+import com.example.Back_E_commece.Model.DTO.ProdutosDTO;
 import com.example.Back_E_commece.Model.Produto;
 import com.example.Back_E_commece.Service.ServiceProd;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:5173")
+@RestController
 @RequestMapping("/Prod")
 public class ControllesProd {
 
@@ -19,7 +28,7 @@ public class ControllesProd {
         ServProd = servProd;
     }
 
-    @RequestMapping("/")
+    @GetMapping()
     public String Teste()
     {
         return "Testando";
@@ -29,11 +38,34 @@ public class ControllesProd {
     public List<Produto> GetProd()
     {
         return ServProd.GetPro();
-
     }
+    @PostMapping(value = "/Cad/Produto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Produto> Cadastro(
+            @ModelAttribute ProdutosDTO dto,
+            @RequestParam("imagem") MultipartFile imagem
+    ) throws IOException {
 
+        System.out.println("Nome: " + dto.nome);
+        System.out.println("Descricao: " + dto.descricao);
+        System.out.println("Preco: " + dto.preco);
 
+        if (imagem == null || imagem.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
 
+        String nomeArquivo = System.currentTimeMillis() + "_" + imagem.getOriginalFilename();
+        Path caminho = Paths.get("uploads").resolve(nomeArquivo);
+        Files.createDirectories(caminho.getParent());
+        Files.copy(imagem.getInputStream(), caminho, StandardCopyOption.REPLACE_EXISTING);
 
+        Produto NewPro = new Produto();
+        NewPro.setNome(dto.nome);
+        NewPro.setDescricao(dto.descricao);
+        NewPro.setPreco(dto.preco);
+        NewPro.setImg("http://localhost:9090/uploads/" + nomeArquivo);
+
+        Produto salvo = ServProd.SetProdut(NewPro);
+        return ResponseEntity.ok(salvo);
+    }
 
 }
