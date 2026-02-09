@@ -39,30 +39,21 @@ public class ControllesProd {
     {
         return ServProd.GetPro();
     }
-    @PostMapping(value = "/Cad/Produto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+
+    @PostMapping(value = "/Cad/Produto"/*, consumes = MediaType.MULTIPART_FORM_DATA_VALUE*/)
     public ResponseEntity<Produto> Cadastro(
-            @ModelAttribute ProdutosDTO dto,
-            @RequestParam("imagem") MultipartFile imagem
+            @RequestPart("produto") ProdutosDTO dto
     ) throws IOException {
 
         System.out.println("Nome: " + dto.nome);
         System.out.println("Descricao: " + dto.descricao);
         System.out.println("Preco: " + dto.preco);
 
-        if (imagem == null || imagem.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        String nomeArquivo = System.currentTimeMillis() + "_" + imagem.getOriginalFilename();
-        Path caminho = Paths.get("uploads").resolve(nomeArquivo);
-        Files.createDirectories(caminho.getParent());
-        Files.copy(imagem.getInputStream(), caminho, StandardCopyOption.REPLACE_EXISTING);
-
         Produto NewPro = new Produto();
         NewPro.setNome(dto.nome);
         NewPro.setDescricao(dto.descricao);
         NewPro.setPreco(dto.preco);
-        NewPro.setImg("http://localhost:9090/uploads/" + nomeArquivo);
 
         Produto salvo = ServProd.SetProdut(NewPro);
         return ResponseEntity.ok(salvo);
