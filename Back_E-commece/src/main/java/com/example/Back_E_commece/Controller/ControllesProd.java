@@ -63,12 +63,12 @@ public class ControllesProd {
         System.out.println("Preco: " + dto.preco);
         System.out.println("Imagen" + imagens.getOriginalFilename());
 
-        Produto Prod = new Produto();
+        
         Produto NewPro = new Produto();
         NewPro.setNome(dto.nome);
         NewPro.setDescricao(dto.descricao);
         NewPro.setPreco(dto.preco);
-        Prod.setImg("/upload/" + nomeArquivo);
+        NewPro.setCaminhoIMG("/upload/" + nomeArquivo);
 
         Produto salvo = ServProd.SetProdut(NewPro );
         return ResponseEntity.ok(salvo);
