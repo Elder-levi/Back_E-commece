@@ -12,7 +12,7 @@ public class Produto {
 private Long id;
 
 @Column (name = "Imagen")
-private String img;
+private String CaminhoIMG;
 
 @Column (name = "Nome")
 private String nome;
@@ -24,9 +24,13 @@ private String Descricao;
 private Double preco;
 
 
-    public String getImg() {return img;}
+    public String getCaminhoIMG() {
+        return CaminhoIMG;
+    }
 
-    public void setImg(String img) {this.img = img;}
+    public void setCaminhoIMG(String caminhoIMG) {
+        CaminhoIMG = caminhoIMG;
+    }
 
     public String getNome() {return nome;}
 
