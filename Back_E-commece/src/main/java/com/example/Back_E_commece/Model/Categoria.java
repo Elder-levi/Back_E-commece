@@ -1,3 +1,5 @@
+package com.example.Back_E_commece.Model;
+
 @Entity
 @Table(name = "Categorias")
 public class Categoria
@@ -8,11 +10,11 @@ public class Categoria
  
     private String Categoria;
 
-    public class Categoria(){}
+    public Categoria(){}
 
     public Long GetId()
     {
-      return id
+      return id;
     }
   
      public void SetId(Long id)
