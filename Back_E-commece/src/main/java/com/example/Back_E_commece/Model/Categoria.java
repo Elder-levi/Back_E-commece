@@ -10,6 +10,28 @@ public class Categoria
 
     public class Categoria(){}
 
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  private Produto produto;
+
+
+  public Produto GetProduto()
+  {
+
+   return produto;
+
+  }
+
+
+  public void SetPublic(Produto produto)
+  {
+  
+  this.produto = produto;
+   
+  }
+  
+    
     public Long GetId()
     {
       return id
