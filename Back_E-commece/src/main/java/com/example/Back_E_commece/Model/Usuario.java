@@ -28,6 +28,20 @@ public class Usuario {
     @Column(name = "DataDeCria")
     private LocalDateTime DataCria;
 
+    @OneToOne(mappedBy = "Usuario" , cascade = CascadeType.ALL)
+    private Carrinho carrinho;
+
+    public Carrinho carrinho()
+    {
+        return carrinho;
+    }
+            
+    public void SetCarrinho( Carrinho c )
+    {
+      this.carrinho = c ;
+    }
+
+
     public String getNome() {
         return nome;
     }
