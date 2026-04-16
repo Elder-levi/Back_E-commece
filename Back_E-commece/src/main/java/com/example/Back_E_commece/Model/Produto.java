@@ -23,7 +23,10 @@ private String Descricao;
 @Column(name = "Preco")
 private Double preco;
 
+@OneToOne(mappedBy = "Produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
+private Categoria categoria;    
 
+    
     public String getCaminhoIMG() {
         return CaminhoIMG;
     }
@@ -47,4 +50,16 @@ private Double preco;
     public Long getId() {return id;}
 
     public void setId(Long id) {this.id = id;}
+
+    public categoria GetCategoria()
+    {
+
+        return Categoria;
+        
+    }
+
+    public void SetCategoria( categotia categoria)
+    {
+        this.categoria = categoria; 
+    }
 }
