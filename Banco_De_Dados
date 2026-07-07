@@ -7,7 +7,8 @@ ID INT AUTO_INCREMENT PRIMARY KEY,
 Imagen VARCHAR(200) NOT NULL,
 Nome VARCHAR(100) NOT NULL,
 Descricao VARCHAR(100) NOT NULL, 
-Preco DOUBLE NOT NULL
+Preco DECIMAL(10,2) NOT NULL CHECK (Preco >= 0),
+Estoque INT NOT NULL DEFAULT 0 CHECK (Estoque >= 0)
 );
 
 CREATE TABLE Usuario
@@ -17,11 +18,21 @@ Nome VARCHAR(100) NOT NULL,
 Email VARCHAR(100) UNIQUE NOT NULL,
 Senha VARCHAR(155) NOT NULL,
 Role ENUM('USER' , 'ADMIN') NOT NULL DEFAULT 'USER',
-DataDeCria DATETIME 
+DataDeCria DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE list_Prod
+(
+ID_list auto_incremet primary key,
+ID_User int not null , 
+ID_Produtos int not null , 
+Quantidade INT NOT NULL DEFAULT 1 CHECK (Quantidade > 0),
+Foreign key(ID_User) references Usuário(ID)  
+Foreign Key(ID_Produtos) references Produtos(ID)
+)
+
 INSERT INTO Usuario( Nome, Email, Senha , Role , DataDeCria)
-VALUES('ELDER' , 'ELderlevi@gmail.com', 'LEVI1234' , 'ADMIN' , "23/02/2026" );
+VALUES('ELDER' , 'Elderlevi@gmail.com', 'LEVI1234' , 'ADMIN' ,  '23/02/2026 00:00:00' );
 
 SELECT * FROM Usuario
 
