@@ -1,38 +1,78 @@
-CREATE DATABASE Ecommece;
-use Ecommece;
+CREATE DATABASE Ecommerce;
+USE Ecommerce;
 
-CREATE TABLE Produtos
-(
-ID INT AUTO_INCREMENT PRIMARY KEY,
-Imagen VARCHAR(200) NOT NULL,
-Nome VARCHAR(100) NOT NULL,
-Descricao VARCHAR(100) NOT NULL, 
-Preco DECIMAL(10,2) NOT NULL CHECK (Preco >= 0),
-Estoque INT NOT NULL DEFAULT 0 CHECK (Estoque >= 0)
+CREATE TABLE Categoria (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(60) NOT NULL UNIQUE
 );
 
-CREATE TABLE Usuario
-(
-ID INT AUTO_INCREMENT PRIMARY KEY,
-Nome VARCHAR(100) NOT NULL,
-Email VARCHAR(100) UNIQUE NOT NULL,
-Senha VARCHAR(155) NOT NULL,
-Role ENUM('USER' , 'ADMIN') NOT NULL DEFAULT 'USER',
-DataDeCria DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE Produtos (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Categoria INT NULL,
+    Imagem VARCHAR(200) NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao TEXT,
+    Preco DECIMAL(10,2) NOT NULL CHECK (Preco >= 0),
+    Estoque INT NOT NULL DEFAULT 0 CHECK (Estoque >= 0),
+    FOREIGN KEY (ID_Categoria) REFERENCES Categoria(ID)
 );
 
-CREATE TABLE list_Prod
-(
-ID_list auto_incremet primary key,
-ID_User int not null , 
-ID_Produtos int not null , 
-Quantidade INT NOT NULL DEFAULT 1 CHECK (Quantidade > 0),
-Foreign key(ID_User) references Usuário(ID)  
-Foreign Key(ID_Produtos) references Produtos(ID)
-)
+CREATE TABLE Usuario (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Senha VARCHAR(255) NOT NULL,   -- usar bcrypt para criptografa a senha, nunca guarda em texto puro
+    Role ENUM('USER','ADMIN') NOT NULL DEFAULT 'USER',
+    DataDeCriacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
-INSERT INTO Usuario( Nome, Email, Senha , Role , DataDeCria)
-VALUES('ELDER' , 'Elderlevi@gmail.com', 'LEVI1234' , 'ADMIN' ,  '23/02/2026 00:00:00' );
+CREATE TABLE Endereco (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Usuario INT NOT NULL,
+    Rua VARCHAR(150) NOT NULL,
+    Numero VARCHAR(10) NOT NULL,
+    Complemento VARCHAR(100),
+    Cidade VARCHAR(80) NOT NULL,
+    Estado CHAR(2) NOT NULL,
+    CEP VARCHAR(9) NOT NULL,
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID)
+);
 
-SELECT * FROM Usuario
+-- Carrinho: itens que o usuário ainda não finalizou a compra
+CREATE TABLE Carrinho (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Usuario INT NOT NULL,
+    ID_Produto INT NOT NULL,
+    Quantidade INT NOT NULL DEFAULT 1 CHECK (Quantidade > 0),
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID),
+    FOREIGN KEY (ID_Produto) REFERENCES Produtos(ID),
+    UNIQUE (ID_Usuario, ID_Produto)  -- evita duplicar o mesmo produto na mesma linha
+);
 
+-- Pedido: a compra "fechada"
+CREATE TABLE Pedido (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Usuario INT NOT NULL,
+    ID_Endereco INT NOT NULL,
+    Status ENUM('PENDENTE','PAGO','ENVIADO','ENTREGUE','CANCELADO') NOT NULL DEFAULT 'PENDENTE',
+    ValorTotal DECIMAL(10,2) NOT NULL CHECK (ValorTotal >= 0),
+    DataPedido DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID),
+    FOREIGN KEY (ID_Endereco) REFERENCES Endereco(ID)
+);
+
+-- Itens do pedido: guarda o preço no momento da compra (não referencia Produtos.Preco diretamente)
+CREATE TABLE ItemPedido (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Pedido INT NOT NULL,
+    ID_Produto INT NOT NULL,
+    Quantidade INT NOT NULL CHECK (Quantidade > 0),
+    PrecoUnitario DECIMAL(10,2) NOT NULL CHECK (PrecoUnitario >= 0),
+    FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID),
+    FOREIGN KEY (ID_Produto) REFERENCES Produtos(ID)
+);
+
+INSERT INTO Usuario (Nome, Email, Senha, Role)
+VALUES ('ELDER', 'Elderlevi@gmail.com', 'hash_da_senha_aqui', 'ADMIN');
+
+SELECT * FROM Usuario;
