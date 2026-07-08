@@ -1,22 +1,37 @@
-import java.sql.Date;
-import java.time.LocalDate;
+package com.example.Back_E_commece.Model;
+import com.example.Back_E_commece.Model.Enum.Status;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-public class Pedidos
-{
+@Table(name = "Pedidos")
+public class Pedidos{
 
-@ID    
-private long Id_Pedido; 
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ private long Id_Pedido;
 
-private Date Data_Pedido;
+ @Id
+ @Column(name = "ID_Usuario")
+ private long Id_Usuario;
 
-@OneToOne
-@JoinCollumn(name = "id")
-private Usuario usuario;
+ @Id
+ @Column(name = "ID_Endereco")
+ private long Id_Endereco;
+
+ @Column(name = "Status")
+ private Status status;
+
+ @Column(name = "ValorTotal")
+ private Double valorTotal;
+
+ @Column(name = "DataPedido")
+ private LocalDateTime Data_Pedido;
 
 public Pedidos()
 {
- Data_Pedido = LocalDate.now();
+ this.Data_Pedido = LocalDateTime.now();
 }
+
 
 
 }

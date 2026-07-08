@@ -1,36 +1,24 @@
 package com.example.Back_E_commece.Model;
 
+import jakarta.persistence.*;
+
 public class Carrinho {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id_Carrinho;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id_Usuario;
 
-    @OneToOne
-    @JoinCollumn(name = "id" , unique = true)
-    public Usuario usuario;
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    public Long id_Produto;
 
-   public Usuario GetUsuario()
-   {
-    return usuario;
-   }
+    @Column(name = "Quantidade")
+    private int quantidade;
 
-   public void SetUsuario( Usuario usuario)
-   {
-  
-      this.usuario = usuario;
-
-   }
-
-   public Long GetID()
-   {
-    return this.id_Carrinho;
-   }
-
-   public void SetId( Long id )
-   {
-     this.id_Carrinho = id;
-   }
 
     
 }

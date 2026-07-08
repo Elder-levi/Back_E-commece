@@ -1,61 +1,18 @@
 package com.example.Back_E_commece.Model;
 
+import jakarta.persistence.*;
+
 @Entity
-@Table(name = "Categorias")
+@Table(name = "Categoria")
 public class Categoria
 {
-    @ID
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
- 
+
+    @Column(name = "Nome")
     private String Categoria;
 
     public Categoria(){}
-
-
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
-  private Produto produto;
-
-
-  public Produto GetProduto()
-  {
-
-   return produto;
-
-  }
-
-
-  public void SetPublic(Produto produto)
-  {
-  
-  this.produto = produto;
-   
-  }
-  
-    
-    public Long GetId()
-    {
-      return id;
-    }
-  
-     public void SetId(Long id)
-     {
-
-        this.id = id;
-     }
-
-    public String GetCategoria()
-    {
-        return Categoria;
-    }
-    
-    public void SetCategoria(String Categoria)
-    {
-       this.Categoria = Categoria;
-    }
-
-      
-
 
 }

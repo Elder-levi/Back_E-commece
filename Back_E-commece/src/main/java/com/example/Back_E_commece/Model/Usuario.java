@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "Usuario")
 public class Usuario {
 
     @Id
@@ -27,19 +28,6 @@ public class Usuario {
 
     @Column(name = "DataDeCria")
     private LocalDateTime DataCria;
-
-    @OneToOne(mappedBy = "Usuario" , cascade = CascadeType.ALL)
-    private Carrinho carrinho;
-
-    public Carrinho carrinho()
-    {
-        return carrinho;
-    }
-            
-    public void SetCarrinho( Carrinho c )
-    {
-      this.carrinho = c ;
-    }
 
 
     public String getNome() {

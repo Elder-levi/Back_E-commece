@@ -11,6 +11,11 @@ public class Produto {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "ID_Categoria")
+    private Long id_Cartegoria;
+
 @Column (name = "Imagen")
 private String CaminhoIMG;
 
@@ -22,6 +27,9 @@ private String Descricao;
 
 @Column(name = "Preco")
 private Double preco;
+
+@Column(name = "Estoque")
+private int estoque;
 
 @OneToOne(mappedBy = "Produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
 private Categoria categoria;    
@@ -51,14 +59,36 @@ private Categoria categoria;
 
     public void setId(Long id) {this.id = id;}
 
-    public categoria GetCategoria()
-    {
-
-        return Categoria;
-        
+    public int getEstoque() {
+        return estoque;
     }
 
-    public void SetCategoria( categotia categoria)
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Long getId_Cartegoria() {
+        return id_Cartegoria;
+    }
+
+    public void setId_Cartegoria(Long id_Cartegoria) {
+        this.id_Cartegoria = id_Cartegoria;
+    }
+
+    public Categoria GetCategoria()
+    {
+        return categoria;
+    }
+
+    public void SetCategoria( Categoria categoria)
     {
         this.categoria = categoria; 
     }
