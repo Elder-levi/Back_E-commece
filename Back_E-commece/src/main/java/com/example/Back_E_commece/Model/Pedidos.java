@@ -10,14 +10,6 @@ public class Pedidos{
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private long Id_Pedido;
 
- @Id
- @Column(name = "ID_Usuario")
- private long Id_Usuario;
-
- @Id
- @Column(name = "ID_Endereco")
- private long Id_Endereco;
-
  @Column(name = "Status")
  private Status status;
 

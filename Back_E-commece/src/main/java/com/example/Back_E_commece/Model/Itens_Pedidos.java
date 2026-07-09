@@ -9,12 +9,6 @@ public class Itens_Pedidos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "ID_Pedido")
-    private long id_pedido;
-
-    @Column(name = "ID_Produto")
-    private long id_produto;
-
     @Column(name = "Quantidade")
     private int quantidade;
 

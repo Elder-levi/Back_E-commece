@@ -2,14 +2,13 @@ package com.example.Back_E_commece.Model;
 
 import jakarta.persistence.*;
 
+
+@Entity
+@Table(name = "Endereco")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Usuario;
 
     @ManyToOne
     @JoinColumn(name = "Usuario_ID")

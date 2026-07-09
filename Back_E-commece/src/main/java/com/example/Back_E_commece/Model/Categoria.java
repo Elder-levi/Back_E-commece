@@ -16,7 +16,7 @@ public class Categoria
     @Column(name = "Nome")
     private String Categoria;
 
-    @OneToMany(mappedBy = "Categoria")
+    @OneToMany(mappedBy = "categoria")
     private List<Produto> produto = new ArrayList<>();
 
     public Categoria(){}

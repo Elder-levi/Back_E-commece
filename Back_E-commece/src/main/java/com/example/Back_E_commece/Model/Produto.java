@@ -11,11 +11,6 @@ public class Produto {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "ID_Categoria")
-    private Long id_Cartegoria;
-
 @Column (name = "Imagen")
 private String CaminhoIMG;
 
@@ -76,13 +71,6 @@ private Categoria categoria;
         this.categoria = categoria;
     }
 
-    public Long getId_Cartegoria() {
-        return id_Cartegoria;
-    }
-
-    public void setId_Cartegoria(Long id_Cartegoria) {
-        this.id_Cartegoria = id_Cartegoria;
-    }
 
     public Categoria GetCategoria()
     {
