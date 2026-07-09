@@ -1,9 +1,6 @@
 package com.example.Back_E_commece.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 public class Endereco {
     @Id
@@ -13,6 +10,10 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_Usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "Usuario_ID")
+    private Usuario usuario;
 
     @Column(name = "Rua")
     private String Rua;

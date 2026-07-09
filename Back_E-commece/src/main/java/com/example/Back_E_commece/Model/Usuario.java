@@ -4,6 +4,7 @@ import com.example.Back_E_commece.Model.Enum.Roles;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "Usuario")
@@ -29,6 +30,8 @@ public class Usuario {
     @Column(name = "DataDeCria")
     private LocalDateTime DataCria;
 
+    @OneToMany(mappedBy = "Usuario")
+    private ArrayList<Endereco> Enderecos  = new ArrayList<>();
 
     public String getNome() {
         return nome;

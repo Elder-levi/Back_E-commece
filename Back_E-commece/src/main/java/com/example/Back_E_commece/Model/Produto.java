@@ -31,7 +31,8 @@ private Double preco;
 @Column(name = "Estoque")
 private int estoque;
 
-@OneToOne(mappedBy = "Produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
+@ManyToOne
+@JoinColumn(name = "ID_Categtoria")
 private Categoria categoria;    
 
     
