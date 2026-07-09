@@ -14,5 +14,8 @@ public class Itens_Pedidos {
 
     @Column(name = "PrecoUnitario")
     private double preco_unitario;
-
+    
+    @ManyToOne(mappedBy = "itens_Pedidos")
+    @JoinColumn(name = "ID_Pedido")
+    private Pedidos pedidos;
 }

@@ -19,6 +19,10 @@ public class Pedidos{
  @Column(name = "DataPedido")
  private LocalDateTime Data_Pedido;
 
+ @OneToMany(mappedBy = "pedidos") 
+ private Itens_Pedidos itens_Pedidos;
+
+
 public Pedidos()
 {
  this.Data_Pedido = LocalDateTime.now();

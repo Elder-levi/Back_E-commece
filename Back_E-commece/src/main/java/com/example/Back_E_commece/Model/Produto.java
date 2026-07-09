@@ -26,11 +26,20 @@ private Double preco;
 @Column(name = "Estoque")
 private int estoque;
 
+
+@ManyToOne
+@JoinColumn(name = "ID_Carinho")
+private Carrinho carrinho;
+
 @ManyToOne
 @JoinColumn(name = "ID_Categtoria")
 private Categoria categoria;    
 
-    
+@ManyToOne
+@JoinColumn(name = "ID_pedidos")    
+private Pedidos pedidos;
+
+
     public String getCaminhoIMG() {
         return CaminhoIMG;
     }
