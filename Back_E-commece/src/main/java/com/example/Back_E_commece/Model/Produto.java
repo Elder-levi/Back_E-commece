@@ -9,6 +9,7 @@ public class Produto {
     
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "ID")
 private Long id;
 
 @Column (name = "Imagen")

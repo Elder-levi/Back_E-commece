@@ -2,6 +2,7 @@ package com.example.Back_E_commece.Model;
 
 import jakarta.persistence.*;
 
+@Entity
 @Table(name = "ItemPedido")
 public class Itens_Pedidos {
 
@@ -15,7 +16,7 @@ public class Itens_Pedidos {
     @Column(name = "PrecoUnitario")
     private double preco_unitario;
     
-    @ManyToOne(mappedBy = "itens_Pedidos")
+    @ManyToOne
     @JoinColumn(name = "ID_Pedido")
     private Pedidos pedidos;
 }
