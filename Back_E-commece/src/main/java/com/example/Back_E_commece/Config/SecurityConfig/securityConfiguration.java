@@ -30,16 +30,15 @@ public class securityConfiguration {
     {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //Estou dizendo para não guarda nenhum dado durante a sessão
                 .exceptionHandling( ex -> ex
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))//Aqui estou tratando um exception para caso alguem não autorizado tente entrar em um rota não autorizada
+                        .accessDeniedHandler((request, response, accessDeniedException) -> { //Aqui é quando o usuario tem o token mais não tem permission
                             response.setStatus(HttpStatus.FORBIDDEN.value());
-
                         })
 
-                        ).authorizeHttpRequests(auth -> auth.requestMatchers("/V1/auth/Registrar").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/V1/avaliacoes").hasRole("ADMIN")
+                        ).authorizeHttpRequests(auth -> auth.requestMatchers("/V1/auth/Registrar").permitAll()//Aqui estou permitindo o acesso a está rota qualquer usuario sem credencial  
+                        .requestMatchers(HttpMethod.POST, "/V1/avaliacoes").hasRole("ADMIN") //aqui so administradores podem ter acesso a essa rota
                         .anyRequest()
                         .authenticated()
                 ).addFilterBefore(jwtAuthenticationFiller, UsernamePasswordAuthenticationFilter.class)
