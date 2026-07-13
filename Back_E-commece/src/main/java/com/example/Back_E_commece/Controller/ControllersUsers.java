@@ -21,7 +21,7 @@ public class ControllersUsers {
         ServUsers = servUsers;
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public List<Usuario> GetUsuarios()
     {
         return ServUsers.GetUsers();

@@ -1,5 +1,6 @@
 package com.example.Back_E_commece.Config.SecurityConfig;
 
+import org.apache.catalina.Authenticator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class securityConfiguration {
     private final JwtAuthenticationFiller jwtAuthenticationFiller;
-
     public securityConfiguration(JwtAuthenticationFiller jwtAuthenticationFiller) {
         this.jwtAuthenticationFiller = jwtAuthenticationFiller;
     }
@@ -38,7 +38,7 @@ public class securityConfiguration {
 
                         })
 
-                        ).authorizeHttpRequests(auth -> auth.requestMatchers("/V1/auth/**").permitAll()
+                        ).authorizeHttpRequests(auth -> auth.requestMatchers("/V1/auth/Registrar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/V1/avaliacoes").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated()

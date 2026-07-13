@@ -31,7 +31,7 @@ public class ControllesProd {
         ServProd = servProd;
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public String Teste()
     {
         return "Testando";

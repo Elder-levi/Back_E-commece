@@ -40,6 +40,8 @@ private Categoria categoria;
 @JoinColumn(name = "ID_pedidos")    
 private Pedidos pedidos;
 
+    public Produto() {
+    }
 
     public String getCaminhoIMG() {
         return CaminhoIMG;

@@ -38,7 +38,24 @@ public class Usuario implements UserDetails {
     private LocalDateTime DataCria;
 
     @OneToMany(mappedBy = "usuario")
-    private ArrayList<Endereco> Enderecos  = new ArrayList<>();
+    private List<Endereco> Enderecos  = new ArrayList<>();
+
+
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        Senha = senha;
+    }
+
+    public Usuario(String nome, String email, String senha, ArrayList<Endereco> enderecos) {
+        this.nome = nome;
+        this.email = email;
+        Senha = senha;
+        Enderecos = enderecos;
+    }
 
     public String getNome() {
         return nome;

@@ -32,4 +32,67 @@ public class Endereco {
     @Column(name = "CEP")
     private String Cep;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getRua() {
+        return Rua;
+    }
+
+    public void setRua(String rua) {
+        Rua = rua;
+    }
+
+    public String getNumero() {
+        return Numero;
+    }
+
+    public void setNumero(String numero) {
+        Numero = numero;
+    }
+
+    public String getComplemento() {
+        return Complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        Complemento = complemento;
+    }
+
+    public String getCidade() {
+        return Cidade;
+    }
+
+    public void setCidade(String cidade) {
+        Cidade = cidade;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String estado) {
+        Estado = estado;
+    }
+
+    public String getCep() {
+        return Cep;
+    }
+
+    public void setCep(String cep) {
+        Cep = cep;
+    }
 }
